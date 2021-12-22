@@ -46,7 +46,7 @@ const Dashboard = () => {
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
     if (event.target.value !== "") {
-      const coinsFilterered = filteredCoins.filter((coin) =>
+      const coinsFilterered = coins.filter((coin) =>
         coin["id"].includes(event.target.value.toLowerCase())
       );
       setFilteredCoins(coinsFilterered);

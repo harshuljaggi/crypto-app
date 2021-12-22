@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { fetchResterData } from "./common/ajax";
 import * as Utils from "./common/utils";
 import Links from "./common/links";
@@ -19,6 +19,20 @@ const CoinsChart = (props) => {
   const [chartData, setChartData] = useState([]);
   const [duration, setDuration] = useState("7"); // start with 7 day duration selected in dropdown
 
+  // Converts fetched data into time-series plotable format supported by charting library
+  const parseChartData = useCallback((data) => {
+    const timeSeriesData = data.map((val) => {
+      return {
+        date: Utils.getDate(
+          val[0],
+          duration === "7" || duration === "30" ? true : false
+        ),
+        price: val[1],
+      };
+    });
+    return timeSeriesData;
+  }, [duration]);
+
   useEffect(() => {
     const init = async () => {
       console.log("fetching chart data.");
@@ -34,21 +48,7 @@ const CoinsChart = (props) => {
       }
     };
     init();
-  }, [duration, props.selectedCurrency, props.selectedCoin]);
-
-  // Converts fetched data into time-series plotable format supported by charting library
-  const parseChartData = (data) => {
-    const timeSeriesData = data.map((val) => {
-      return {
-        date: Utils.getDate(
-          val[0],
-          duration === "7" || duration === "30" ? true : false
-        ),
-        price: val[1],
-      };
-    });
-    return timeSeriesData;
-  };
+  }, [duration, props.selectedCurrency, props.selectedCoin, parseChartData]);
 
   // handler for dropwdown change of chart duration in days
   const handleDurationChange = (event) => {
