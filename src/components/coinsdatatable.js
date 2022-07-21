@@ -141,6 +141,11 @@ const CoinsDataTable = (props) => {
               </TableCell>
             </TableRow>
           ))}
+          {props.coins.length === 0 && (
+            <TableRow>
+              <h3>No Results Found !</h3>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>

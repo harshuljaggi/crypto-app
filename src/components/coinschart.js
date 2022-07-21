@@ -20,18 +20,21 @@ const CoinsChart = (props) => {
   const [duration, setDuration] = useState("7"); // start with 7 day duration selected in dropdown
 
   // Converts fetched data into time-series plotable format supported by charting library
-  const parseChartData = useCallback((data) => {
-    const timeSeriesData = data.map((val) => {
-      return {
-        date: Utils.getDate(
-          val[0],
-          duration === "7" || duration === "30" ? true : false
-        ),
-        price: val[1],
-      };
-    });
-    return timeSeriesData;
-  }, [duration]);
+  const parseChartData = useCallback(
+    (data) => {
+      const timeSeriesData = data.map((val) => {
+        return {
+          date: Utils.getDate(
+            val[0],
+            duration === "7" || duration === "30" ? true : false
+          ),
+          price: val[1],
+        };
+      });
+      return timeSeriesData;
+    },
+    [duration]
+  );
 
   useEffect(() => {
     const init = async () => {
@@ -69,9 +72,9 @@ const CoinsChart = (props) => {
         data={chartData}
         margin={{
           top: 30,
-          right: 30,
-          left: 20,
-          bottom: 5,
+          right: 10,
+          left: 0,
+          bottom: 0,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />

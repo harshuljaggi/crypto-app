@@ -18,6 +18,7 @@ const Dropdown = (props) => {
         id="demo-simple-select"
         value={props.selected}
         onChange={props.handleChange}
+        style={{ width: "100%" }}
       >
         {props.values.map((val) => {
           return (

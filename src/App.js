@@ -5,10 +5,7 @@ import { AppBar, Toolbar, Typography, Container } from "@material-ui/core";
 function App() {
   const menuTitle = "Crypto App";
   return (
-    <Container
-      maxWidth="xl"
-      style={{ paddingLeft: "6px", paddingRight: "6px" }}
-    >
+    <Container maxWidth="xl">
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6">{menuTitle}</Typography>
